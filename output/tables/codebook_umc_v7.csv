@@ -1,0 +1,47 @@
+﻿Variable,Description,UMC Dimension,Data Source,Calculation,Scale/Unit,Note
+district_code,District code (sequential 5-digit),-,-,"11010-11250, 25 districts in Seoul",,
+district,District name,-,-,,,
+year,Reference year,-,-,2023 or 2024,,
+,,,,,,
+[Raw Indicators - Connectivity],,,,,,
+station_density_4g,4G base station density (living pop.),Connectivity,Spectrum Resource Management System,Unique coords / (daytime living pop / 1000),stations/1K pop,Deduplicated coords
+station_density_5g,5G base station density (living pop.),Connectivity,Spectrum Resource Management System,Unique coords / (daytime living pop / 1000),stations/1K pop,Deduplicated coords
+download_speed,Avg. download speed,Connectivity,NIA Communication Quality (CQ),Mean of measurement points per district (annual),Mbps,Higher is better
+living_pop_daytime,Daytime living population (09-18h avg),Connectivity (denominator),Seoul Living Population Data,Monthly 1st-day daytime census block sum -> district -> 12-month avg,persons,Denominator for station density
+,,,,,,
+[Raw Indicators - Available for Use],,,,,,
+mobile_data_usage,Mobile data usage,Available for Use,SKT Telecom Data,Pop-weighted district avg -> 12-month avg,GB/person,
+online_service_days,Online service usage days (4 categories),Available for Use,SKT Telecom Data,Finance+Shopping+Video+Delivery pop-weighted sum,days/month,
+wifi_density,Public WiFi per 1K total pop,Available for Use,Local Admin License Data,WiFi locations / total pop * 1000,per 1K pop,
+,,,,,,
+[Raw Indicators - Affordability],,,,,,
+delinq_rate,Telecom fee delinquency rate (3-month),Affordability,SKT Telecom Data,Pop-weighted district avg -> 12-month avg,%,Higher is worse (reverse-normalized)
+avg_income,District avg monthly income,Affordability,Seoul Commercial Analysis Service,District-level avg monthly income,KRW/month,Higher is better
+,,,,,,
+[Raw Indicators - Devices],,,,,,
+device_home_core,Core digital devices owned at home,Devices,Seoul Digital Competency Survey 2023,"Desktop+Laptop+Tablet ownership sum, weighted avg",types (0-3),Excl. smartphone
+device_use_core,Core digital devices used personally,Devices,Seoul Digital Competency Survey 2023,"Desktop+Laptop+Smartphone+Tablet sum, weighted avg",types (0-4),Actual usage
+,,,,,,
+[Raw Indicators - Digital Skills],,,,,,
+skill_q4,Basic smart device operation ability,Digital Skills,Seoul Digital Competency Survey 2023,"Q4_1-6 sum(24pt)/24, weighted avg",ratio (0-1),
+skill_q5b,Digital service usage ability,Digital Skills,Seoul Digital Competency Survey 2023,"Q5B_1-10 sum(40pt)/40, weighted avg",ratio (0-1),
+skill_q6b,Smart device activity proficiency,Digital Skills,Seoul Digital Competency Survey 2023,"Q6B_1-7 sum(28pt)/28, weighted avg",ratio (0-1),
+skill_q7,Cyber activity capability,Digital Skills,Seoul Digital Competency Survey 2023,"Q7_1-5 sum(20pt)/20, weighted avg",ratio (0-1),
+,,,,,,
+[Raw Indicators - Safety],,,,,,
+safety_behavior,Digital security practice behavior,Safety,Seoul Digital Competency Survey 2023,"Q10_1-7 sum(28pt)/28, weighted avg",ratio (0-1),
+safety_awareness,Digital security awareness,Safety,Seoul Digital Competency Survey 2023,"Q10_8-10 sum(12pt)/12, weighted avg",ratio (0-1),
+,,,,,,
+[Normalized Indicators (n_ prefix)],,,,,,
+n_station_density_4g ~ n_safety_awareness,Min-Max normalization of raw indicators,Respective,Computed,Min-Max within 25 districts,0-1,delinq_rate only: reverse direction
+,,,,,,
+[Dimension Scores (score_ prefix)],,,,,,
+score_Infrastructure,Connectivity dimension score,Connectivity,Computed,"mean(n_4g_density, n_5g_density, n_dl_speed)",0-1,Equal weight avg of 3 indicators
+score_Available_for_Use,Available for Use dimension score,Available for Use,Computed,"mean(n_mobile_data, n_online_svc, n_wifi)",0-1,Equal weight avg of 3 indicators
+score_Affordability,Affordability dimension score,Affordability,Computed,"mean(n_avg_income, n_delinq_rate)",0-1,Equal weight avg of 2 indicators
+score_Devices,Devices dimension score,Devices,Computed,"mean(n_device_home, n_device_use)",0-1,Equal weight avg of 2 indicators
+score_Digital_Skills,Digital Skills dimension score,Digital Skills,Computed,"mean(n_q4, n_q5b, n_q6b, n_q7)",0-1,Equal weight avg of 4 indicators
+score_Safety,Safety dimension score,Safety,Computed,"mean(n_behavior, n_awareness)",0-1,Equal weight avg of 2 indicators
+,,,,,,
+[Composite Score],,,,,,
+score_UMC,UMC composite score,-,Computed,mean(6 dimension scores),0-1,Equal weight avg of 6 dimensions

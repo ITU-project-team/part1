@@ -1,0 +1,41 @@
+# OS / Editor
+.DS_Store
+*~
+.vscode/
+.idea/
+
+# R
+.Rhistory
+.Rapp.history
+.Rproj.user/
+.Rdata
+.RData
+.Renviron
+.Rprofile.user
+
+# Python (보조)
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# 데이터: raw 완전 제외 (대용량 + 원본 보호)
+data/raw/
+
+# 비밀
+.env
+.env.*
+*.secret
+secrets/
+config/local.*
+
+# 임시
+*.tmp
+*.log
+.cache/
+
+# Part 1 전용: 무거운 산출물 일부 제외
+output/figures/Part 1.zip
+output/archive/
