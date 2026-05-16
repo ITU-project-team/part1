@@ -38,9 +38,12 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ── 경로 ──
-BASE = Path(r"C:\woo\data\UMC\raw\base_station")
-GIS  = Path(r"C:\woo\data\UMC\raw\gis\Seoul\Seoul.shp")
-OUT  = Path(r"C:\woo\data\UMC\processed")
+ROOT = Path(__file__).resolve().parents[1]
+RAW = ROOT / "data" / "raw"
+PROCESSED = ROOT / "data" / "processed"
+BASE = RAW / "base_station"
+GIS_PATH = ROOT / "data" / "gis" / "Seoul" / "Seoul.shp"
+OUT = PROCESSED
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ── 1. 데이터 로드 ──
@@ -75,7 +78,7 @@ print(f"   5G 고유 (위치×통신사): {len(df_5g_by_carrier):,}건")
 
 # ── 3. GeoDataFrame 변환 + 서울 Shapefile 공간 조인 ──
 print("\n3. 공간 조인 (기지국 → 자치구)...")
-seoul = gpd.read_file(GIS, encoding='cp949')
+seoul = gpd.read_file(GIS_PATH, encoding='cp949')
 
 # 서울 shapefile: EPSG:4326 (WGS84)
 # 면적 산출: 투영 좌표계(EPSG:5179, Korea TM)로 변환

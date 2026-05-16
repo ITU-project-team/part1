@@ -33,8 +33,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # -- 경로 --
-RAW = Path(r"C:\woo\data\UMC\raw")
-OUT = Path(r"C:\woo\data\UMC\processed")
+ROOT = Path(__file__).resolve().parents[1]
+RAW = ROOT / "data" / "raw"
+OUT = ROOT / "data" / "processed"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # 통신정보 폴더 자동 탐색

@@ -1,4 +1,4 @@
-﻿Variable,Description,UMC Dimension,Data Source,Calculation,Scale/Unit,Note
+Variable,Description,UMC Dimension,Data Source,Calculation,Scale/Unit,Note
 district_code,District code (sequential 5-digit),-,-,"11010-11250, 25 districts in Seoul",,
 district,District name,-,-,,,
 year,Reference year,-,-,2023 or 2024,,
