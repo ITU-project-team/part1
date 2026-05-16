@@ -34,10 +34,10 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # ── 경로 ──
-RAW = Path(r"C:\woo\data\UMC\raw")
-PROCESSED = Path(r"C:\woo\data\UMC\processed")
-PART1 = Path(r"C:\woo\Project\umc\Analysis\Part 1")
-OUT = PART1 / "output" / "tables"
+ROOT = Path(__file__).resolve().parents[1]
+RAW = ROOT / "data" / "raw"
+PROCESSED = ROOT / "data" / "processed"
+OUT = ROOT / "output" / "tables"
 OUT.mkdir(parents=True, exist_ok=True)
 
 print("=" * 70)

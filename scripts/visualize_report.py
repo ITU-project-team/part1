@@ -33,10 +33,10 @@ except ImportError:
 from pathlib import Path
 
 # ── Paths ──
-PART1 = Path(r"C:\woo\Project\umc\Analysis\Part 1")
-RESULT = PART1 / "output" / "tables"
-OUT = PART1 / "output" / "figures" / "report"
-GIS_PATH = Path(r"C:\woo\data\UMC\raw\gis\Seoul\Seoul.shp")
+ROOT = Path(__file__).resolve().parents[1]
+RESULT = ROOT / "output" / "tables"
+OUT = ROOT / "output" / "figures" / "report"
+GIS_PATH = ROOT / "data" / "gis" / "Seoul" / "Seoul.shp"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # ── Style ──

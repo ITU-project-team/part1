@@ -7,6 +7,10 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+RAW = ROOT / "data" / "raw"
+OUT = ROOT / "output" / "tables"
+
 # --- 구 코드 매핑 테이블 ---
 gu_codes = pd.DataFrame({
     "gu_name": [
@@ -34,7 +38,7 @@ gu_codes = pd.DataFrame({
 years = [2022, 2023, 2024]
 raw_list = []
 for yr in years:
-    path = Path("raw") / f"CQ_1_{yr}.csv"
+    path = RAW / f"CQ_1_{yr}.csv"
     df = pd.read_csv(path, encoding="cp949")
     # 제거: 구분, 읍면동, 접속성공률 관련 열, LTE 관련 열
     drop_cols = [c for c in df.columns if c in ["구분", "읍면동"]
@@ -90,7 +94,7 @@ print("=== PART 1 완료: 통신품질 ===")
 # PART 2: 공공 와이파이 / 인구 (AFU_1_SGG.xlsx)
 # ============================================================
 
-df_afu = pd.read_excel("raw/AFU_1_SGG.xlsx")
+df_afu = pd.read_excel(RAW / "AFU_1_SGG.xlsx")
 df_afu["wifi_per_1k_total"] = df_afu["wifi"] / df_afu["olderly"] * 1000
 df_afu["SIGUNGU_CD"] = pd.to_numeric(df_afu["SIGUNGU_CD"], errors="coerce")
 df_afu = df_afu[["SIGUNGU_CD", "wifi_per_1k_total"]]
@@ -104,7 +108,7 @@ print("=== PART 2 완료: 와이파이/인구 ===")
 
 import pyreadstat
 
-sav, meta = pyreadstat.read_sav("raw/Seoul_digital_2023.SAV")
+sav, meta = pyreadstat.read_sav(str(RAW / "Seoul_digital_2023.SAV"))
 
 # --- 파생 변수 생성 ---
 
@@ -234,7 +238,7 @@ print(f"행: {len(df_final)} / 열: {len(df_final.columns)}")
 print("열 이름:")
 print("\n".join(df_final.columns.tolist()))
 
-out_dir = Path(__file__).parent.parent / "output" / "tables"
+out_dir = OUT
 out_dir.mkdir(parents=True, exist_ok=True)
 df_final.to_csv(out_dir / "seoul_umc_indicators.csv", index=False, encoding="utf-8-sig")
 print(f"\n저장 완료: {out_dir / 'seoul_umc_indicators.csv'}")

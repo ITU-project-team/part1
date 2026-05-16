@@ -38,8 +38,9 @@ import warnings
 warnings.filterwarnings('ignore')
 
 # -- 경로 --
-RAW = Path(r"C:\woo\data\UMC\raw\생활인구")
-OUT = Path(r"C:\woo\data\UMC\processed")
+ROOT = Path(__file__).resolve().parents[1]
+RAW = ROOT / "data" / "raw" / "생활인구"
+OUT = ROOT / "data" / "processed"
 OUT.mkdir(parents=True, exist_ok=True)
 
 # -- 주간 시간대 정의 --

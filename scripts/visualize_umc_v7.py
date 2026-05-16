@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 UMC v7 시각화 - 연도별 개별 산출
 ================================
@@ -42,10 +42,10 @@ except ImportError:
 from pathlib import Path
 
 # ── 경로 ──
-PART1 = Path(r"C:\woo\Project\umc\Analysis\Part 1")
-RESULT = PART1 / "output" / "tables"
-OUT = PART1 / "output"
-GIS_PATH = Path(r"C:\woo\data\UMC\raw\gis\Seoul\Seoul.shp")
+ROOT = Path(__file__).resolve().parents[1]
+RESULT = ROOT / "output" / "tables"
+OUT = ROOT / "output"
+GIS_PATH = ROOT / "data" / "gis" / "Seoul" / "Seoul.shp"
 
 CSV_ENCODING = 'euc-kr'
 
