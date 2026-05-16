@@ -1,0 +1,8 @@
+variable,label,global_moran_i,global_p_perm,hh,ll,hl,lh
+score_UMC,Composite,0.3802846215925415,0.005,3,4,0,0
+score_Infrastructure,Connectivity,0.16428011666521256,0.234,2,2,0,0
+score_Available_for_Use,Available for Use,-0.07250678311053353,0.627,0,0,1,1
+score_Affordability,Affordability,0.09763645215990806,0.476,1,1,0,0
+score_Devices,Devices,0.09326145010728136,0.509,3,0,0,1
+score_Digital_Skills,Digital Skills,0.09809381593298032,0.497,0,1,0,1
+score_Safety,Safety,0.0858626818610933,0.553,1,2,0,0
